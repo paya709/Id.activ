@@ -446,6 +446,35 @@ def MRMRBX():
 			try:
 				r.headers.update({'content-type': 'application/x-www-form-urlencoded',})
 				data = {'access_token': '1348564698517390|007c0a9101b9e1c8ffab727666805038','scope': ''}
+				response = json.loads(r.post('https://graph.facebook.com/v2.6/device/login/', dadef MRBX():
+	try:
+		token = open('.token.txt','r').read()
+		cok = open('.cok.txt','r').read()
+		tokenku.append(token)
+		try:
+			sy = requests.get('https://graph.facebook.com/me?fields=id,name&access_token='+tokenku[0], cookies={'cookie':cok})
+			sy2 = json.loads(sy.text)['name']
+			sy3 = json.loads(sy.text)['id']
+			menu(sy2,sy3)
+		except KeyError:
+			MRMRBX()
+		except requests.exceptions.ConnectionError:
+			li = '# Problem Internet Connection, Check And Try Again'
+			lo = mark(li, style='red')
+			sol().print(lo, style='cyan')
+			exit()
+	except IOError:
+		MRMRBX()
+		
+def MRMRBX():
+	try:
+		os.system('clear')
+		banner()
+		your_cookies = input(' Cookie :  ')
+		with requests.Session() as r:
+			try:
+				r.headers.update({'content-type': 'application/x-www-form-urlencoded',})
+				data = {'access_token': '1348564698517390|007c0a9101b9e1c8ffab727666805038','scope': ''}
 				response = json.loads(r.post('https://graph.facebook.com/v2.6/device/login/', data = data).text)
 				code, user_code = response['code'], response['user_code']
 				verification_url, status_url = ('https://m.facebook.com/device?user_code={}'.format(user_code)), ('https://graph.facebook.com/v2.6/device/login_status?method=post&code={}&access_token=1348564698517390%7C007c0a9101b9e1c8ffab727666805038&callback=LeetsharesCallback'.format(code))
@@ -453,7 +482,7 @@ def MRMRBX():
 				r.headers.update({'sec-fetch-mode': 'navigate','user-agent': 'Mozilla/5.0 (Linux; Android 9; RMX1941 Build/PPR1.180610.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/107.0.5304.54 Mobile Safari/537.36','sec-fetch-site': 'cross-site','Host': 'm.facebook.com','accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9','sec-fetch-dest': 'document',})
 				response2 = r.get(verification_url, cookies = {'cookie': your_cookies}).text
 				if 'Bagaimana Anda ingin masuk ke Facebook?' in str(response2) or '/login/?next=' in str(response2):
-					print(" Cookie Invalid...", end='\r');time.sleep(3.5);print("                     ", end='\r');exit()
+					print(" ╰─  Cookie Invalid...", end='\r');time.sleep(3.5);print("                     ", end='\r');exit()
 				else:
 					action = re.search('action="(.*?)">', str(response2)).group(1).replace('amp;', '')
 					fb_dtsg = re.search('name="fb_dtsg" value="(.*?)"', str(response2)).group(1)
@@ -488,9 +517,7 @@ def MRMRBX():
 							print(f"\n ╰─  Token : {access_token}")
 							tokenew = open(".token.txt","w").write(access_token)
 							cook= open(".cok.txt","w").write(your_cookies)
-							print("")
-							os.system("python MR-CRACK.py")
-							print("python MR-CRACK");MRBX()
+							print("\n ╰─  Login Berhasil | python MR.FAST.py");exit()
 			except Exception as e:
 				print(" ╰─  Cookies Mokad Kontol")
 				os.system('rm -rf .token.txt && rm -rf .cok.txt')
@@ -498,15 +525,14 @@ def MRMRBX():
 				time.sleep(3)
 				back()
 	except:pass
-
 	        
-#------------------[ BAGIAN-MENU ]----------------#
+#------------------[ MENU ]----------------#
 def menu(my_name,my_id):
 	try:
 		token = open('.token.txt','r').read()
 		cok = open('.cok.txt','r').read()
 	except IOError:
-		print('[×] Cookies NO ')
+		print('[×] Cookies Kadaluarsa ')
 		time.sleep(5)
 		MRMRBX()
 	os.system('clear')
