@@ -312,7 +312,7 @@ def banner():
 #--------------------[ BAGIAN-MASUK ]--------------#
 import requests,json,re
 ses = requests.Session()
-def DYNO():
+def login():
 	try:
 		token = open('.token.txt','r').read()
 		cok = open('.cok.txt','r').read()
@@ -323,42 +323,90 @@ def DYNO():
 			sy3 = json.loads(sy.text)['id']
 			menu(sy2,sy3)
 		except KeyError:
-			MRDYNO()
+			AHMAD1234()
 		except requests.exceptions.ConnectionError:
-			li = '# Problem Internet Connection, Check And Try Again'
+			li = '# PROBLEM INTERNET CONNECTION, CHECK AND TRY AGAIN'
 			lo = mark(li, style='red')
 			sol().print(lo, style='cyan')
 			exit()
 	except IOError:
-		MRDYNO()
-		
-def MRDYNO():
+		AHMAD1234()
+
+def token1():
 	try:
-		os.system('clear')
-		banner()
-		your_cookies = input(' Cookie :  ')
+		ses = requests.Session()
+		print("=======================================")
+		cookie = input(f'\n[{k}+{x}] inter Cookie : ')
+		cookies = {'cookie':cookie}
+		url = 'https://www.facebook.com/adsmanager/manage/campaigns'
+		req = ses.get(url,cookies=cookies)
+		set = re.search('act=(.*?)&nav_source',str(req.content)).group(1)
+		nek = '%s?act=%s&nav_source=no_referrer'%(url,set)
+		roq = ses.get(nek,cookies=cookies)
+		tok = re.search('accessToken="(.*?)"',str(roq.content)).group(1)
+		tokenw = open(".token.txt", "w").write(tok)
+		cokiew = open(".cok.txt", "w").write(cookie)
+		print('\nLogin SUCCES ✓')
+		menu(my_name,my_id)
+	except Exception as e:
+		os.system('rm -rf .cok.txt && rm -rf .token.txt')
+		print(e)
+		exit()
+		
+
+def AHMAD1234():
+	try:
+		cetak(nel('\t© INTER COOKIE : [green]DATR+EDOUGH[white] ®'))
+		your_cookies = input("\x1b[1;97m[\x1b[1;92m?\x1b[1;97m] Your Cookie :\x1b[1;93m ")
 		with requests.Session() as r:
 			try:
 				r.headers.update({'content-type': 'application/x-www-form-urlencoded',})
-				data = {'access_token': '1348564698517390|007c0a9101b9e1c8ffab727666805038','scope': ''}
+				data = {
+				'access_token': '867777633323150|446fdcd4a3704f64e5f6e5fd12d35d01',
+				'scope': ''
+				}
 				response = json.loads(r.post('https://graph.facebook.com/v2.6/device/login/', data = data).text)
 				code, user_code = response['code'], response['user_code']
-				verification_url, status_url = ('https://m.facebook.com/device?user_code={}'.format(user_code)), ('https://graph.facebook.com/v2.6/device/login_status?method=post&code={}&access_token=1348564698517390%7C007c0a9101b9e1c8ffab727666805038&callback=LeetsharesCallback'.format(code))
-				r.headers.pop('content-type')
-				r.headers.update({'sec-fetch-mode': 'navigate','user-agent': 'Mozilla/5.0 (Linux; Android 9; RMX1941 Build/PPR1.180610.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/107.0.5304.54 Mobile Safari/537.36','sec-fetch-site': 'cross-site','Host': 'm.facebook.com','accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9','sec-fetch-dest': 'document',})
+				verification_url, status_url = ('https://m.facebook.com/device?user_code={}'.format(user_code)), ('https://graph.facebook.com/v2.6/device/login_status?method=post&code={}&access_token=867777633323150|446fdcd4a3704f64e5f6e5fd12d35d01&callback=LeetsharesCallback'.format(code))
+				r.headers.pop(
+				'content-type'
+				)
+				r.headers.update({
+				'sec-fetch-mode': 'navigate',
+				'user-agent': 'Mozilla/5.0 (Linux; Android 9; RMX1941 Build/PPR1.180610.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/107.0.5304.54 Mobile Safari/537.36',
+				'sec-fetch-site': 'cross-site',
+				'Host': 'm.facebook.com',
+				'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+				'sec-fetch-dest': 'document',
+				})
 				response2 = r.get(verification_url, cookies = {'cookie': your_cookies}).text
 				if 'Bagaimana Anda ingin masuk ke Facebook?' in str(response2) or '/login/?next=' in str(response2):
-					print(" ╰─  Cookie Invalid...", end='\r');time.sleep(3.5);print("                     ", end='\r');exit()
+					print("\x1b[1;97m[\x1b[1;91m!\x1b[1;97m]\x1b[1;91m Cookie Invalid...", end='\r');time.sleep(3.5);print("                     ", end='\r')
 				else:
 					action = re.search('action="(.*?)">', str(response2)).group(1).replace('amp;', '')
 					fb_dtsg = re.search('name="fb_dtsg" value="(.*?)"', str(response2)).group(1)
 					jazoest = re.search('name="jazoest" value="(\d+)"', str(response2)).group(1)
-					data = {'fb_dtsg': fb_dtsg,'jazoest': jazoest,'qr': 0,'user_code': user_code,}
-					r.headers.update({'origin': 'https://m.facebook.com','referer': verification_url,'content-type': 'application/x-www-form-urlencoded','sec-fetch-site': 'same-origin',})
+					data = {
+					'fb_dtsg': fb_dtsg,
+					'jazoest': jazoest,
+					'qr': 0,
+					'user_code': user_code,
+					}
+					r.headers.update({
+					'origin': 'https://m.facebook.com',
+					'referer': verification_url,
+					'content-type': 'application/x-www-form-urlencoded',
+					'sec-fetch-site': 'same-origin',
+					})
 					response3 = r.post('https://m.facebook.com{}'.format(action), data = data, cookies = {'cookie': your_cookies})
 					if 'https://m.facebook.com/dialog/oauth/?auth_type=rerequest&redirect_uri=' in str(response3.url):
-						r.headers.pop('content-type');r.headers.pop('origin')
+						r.headers.pop(
+						'content-type'
+						);r.headers.pop(
+						'origin'
+						)
 						response4 = r.post(response3.url, data = data, cookies = {'cookie': your_cookies}).text
+
 						action = re.search('action="(.*?)"', str(response4)).group(1).replace('amp;', '')
 						fb_dtsg = re.search('name="fb_dtsg" value="(.*?)"', str(response4)).group(1)
 						jazoest = re.search('name="jazoest" value="(\d+)"', str(response4)).group(1)
@@ -369,38 +417,62 @@ def MRDYNO():
 						auth_type = re.search('name="auth_type" value="(.*?)"', str(response4)).group(1)
 						encrypted_post_body = re.search('name="encrypted_post_body" value="(.*?)"', str(response4)).group(1)
 						return_format = re.search('name="return_format\\[\\]" value="(.*?)"', str(response4)).group(1)
-						r.headers.update({'origin': 'https://m.facebook.com','referer': response3.url,'content-type': 'application/x-www-form-urlencoded',})
-						data = {'fb_dtsg': fb_dtsg,'jazoest': jazoest,'scope': scope,'display': display,'user_code': user_code,'logger_id': logger_id,'auth_type': auth_type,'encrypted_post_body': encrypted_post_body,'return_format[]': return_format,}
+						r.headers.update({
+						'origin': 'https://m.facebook.com',
+						'referer': response3.url,
+						'content-type': 'application/x-www-form-urlencoded',
+						})
+						data = {
+						'fb_dtsg': fb_dtsg,
+						'jazoest': jazoest,
+						'scope': scope,
+						'display': display,
+						'user_code': user_code,
+						'logger_id': logger_id,
+						'auth_type': auth_type,
+						'encrypted_post_body': encrypted_post_body,
+						'return_format[]': return_format,
+						}
 						response5 = r.post('https://m.facebook.com{}'.format(action), data = data, cookies = {'cookie': your_cookies}).text
 						windows_referer = re.search('window.location.href="(.*?)"', str(response5)).group(1).replace('\\', '')
-						r.headers.pop('content-type');r.headers.pop('origin')
-						r.headers.update({'referer': 'https://m.facebook.com/',})
+						r.headers.pop(
+						'content-type'
+						);r.headers.pop(
+						'origin'
+						)
+						r.headers.update({
+						'referer': 'https://m.facebook.com/',
+						})
 						response6 = r.get(windows_referer, cookies = {'cookie': your_cookies}).text
 						if 'Sukses!' in str(response6):
-							r.headers.update({'sec-fetch-mode': 'no-cors','referer': 'https://graph.facebook.com/','Host': 'graph.facebook.com','accept': '*/*','sec-fetch-dest': 'script','sec-fetch-site': 'cross-site',})
+							r.headers.update({
+							'sec-fetch-mode': 'no-cors',
+							'referer': 'https://graph.facebook.com/',
+							'Host': 'graph.facebook.com',
+							'accept': '*/*',
+							'sec-fetch-dest': 'script',
+							'sec-fetch-site': 'cross-site',
+							})
 							response7 = r.get(status_url, cookies = {'cookie': your_cookies}).text
 							access_token = re.search('"access_token": "(.*?)"', str(response7)).group(1)
-							print(f"\n ╰─  Token : {access_token}")
+							print(f"\x1b[1;97m[\x1b[1;92m*\x1b[1;97m] Token :\x1b[1;92m {access_token}")
 							tokenew = open(".token.txt","w").write(access_token)
 							cook= open(".cok.txt","w").write(your_cookies)
-							print("\n ╰─≫  Login Sucssesfully ");exit()
+							print("\n ╰─  Login Sucec | REPEAT");exit()
 			except Exception as e:
-				print(" ╰─>  Cookies Expired ")
+				print("   Cookies WRONG ")
 				os.system('rm -rf .token.txt && rm -rf .cok.txt')
 				print(e)
 				time.sleep(3)
 				back()
 	except:pass
 #------------------[ BAGIAN-MENU ]----------------#
-from rich.console import Console
-from rich.table import Table
 def menu(my_name,my_id):
 	try:
-		cok = open('.cok.txt','r').read()
-		token = open('.token.txt','r').read()
-		
+	    token = open('.token.txt','r').read()
+	    cok = open('.cok.txt','r').read()
 	except IOError:
-		print('[×] Cookies expered ')
+		print('\033[0m╰─ Expired Cookies ')
 		time.sleep(5)
 		login_lagi334()
 	os.system('clear')
@@ -1035,5 +1107,33 @@ def crackmbasic(idf,pwv):
 			time.sleep(31)
 	loop+=1
 #-----------------------[ SYSTEM-CONTROL ]--------------------#
-if __name__=='__main__':
-	DYNO()
+def make():
+	try:os.mkdir('OK')
+	except:pass
+	try:os.mkdir('CP')
+	except:pass
+	try:os.system('touch .prox.txt')
+	except:pass
+	try:os.mkdir('/sdcard/dump')
+	except:pass
+	menu1()
+
+#----------[BUAT EXPIRED SCRIPT]----------#
+expired = ['04', '08', '2023']
+saat_ini = datetime.now()
+tgl = saat_ini.strftime('%d')
+bln = saat_ini.strftime('%m')
+thn = saat_ini.strftime('%Y')
+waktu_new = (tgl+"-"+bln+"-"+thn)
+
+if __name__=="__main__":
+	tanggal = thn + bln + tgl
+	exp = expired[2] + expired[1] + expired[0]
+	if tanggal >= exp:
+		os.system("clear")
+		print('\033[0m')
+		cetak(nel(f"""[[red]•[white]] Script HAS BEEN EXPERID SEND MEESAGE FOR AUTHOUR AHMAD \n[[red]•[white]] telegram : @MRBX_709"""))
+		sys.exit()
+	else:
+		os.system('git pull')
+		make()
