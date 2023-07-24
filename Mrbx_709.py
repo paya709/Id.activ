@@ -299,7 +299,7 @@ def banner():
        //.=|=.\\
       // .=|=. \\
       \\ .=|=. //.   CODE BY  : Mrbx_709
-       \\(_=_)//.    Telegram : 
+       \\(_=_)//.    Telegram : @Mrbx_709
         (:| |:).      Github   : https://t.me/icstarpro
          || ||.       Team     : 709
          () ().      Version  : V.3
